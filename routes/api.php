@@ -17,5 +17,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('payment ', [\App\Http\Controllers\api\PaymentController::class, 'store'])->name('payment');
 });
 
-Route::post('login', [\App\Http\Controllers\api\Auth\AuthController::class, 'login'])->name('sign-in');
-Route::post('register', [\App\Http\Controllers\api\Auth\AuthController::class, 'register'])->name('sign-up');
+Route::post('sign-in', [\App\Http\Controllers\api\Auth\AuthController::class, 'login'])->name('sign-in');
+Route::post('sign-up', [\App\Http\Controllers\api\Auth\AuthController::class, 'register'])->name('sign-up');

@@ -33,6 +33,9 @@ class PaymentController extends Controller
         if (!$recipientAccount)
             return response(['error' => 'Account not found'],Response::HTTP_NOT_FOUND);
 
+        if ($recipientAccount->id === auth()->user()->id)
+            return response(['error' => 'You cannot transfer money to yourself'], Response::HTTP_BAD_REQUEST);
+
         $payment = Payment::create([
             'uuid' => Str::uuid()->toString(),
             'sender_account_id' => auth()->user()->id,
