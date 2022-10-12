@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('account', [\App\Http\Controllers\api\AccountController::class, 'index'])->name('account');
     Route::post('payment ', [\App\Http\Controllers\api\PaymentController::class, 'store'])->name('payment');
+    Route::post('logout', [\App\Http\Controllers\api\Auth\AuthController::class, 'logout'])->name('logout');
 });
 
 Route::post('sign-in', [\App\Http\Controllers\api\Auth\AuthController::class, 'login'])->name('sign-in');

@@ -29,9 +29,9 @@ class AuthController extends Controller
 
     /**
      * @param RegisterRequest $request
-     * @return Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+     * @return \Illuminate\Http\RedirectResponse|Response
      */
-    public function register(RegisterRequest $request): Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+    public function register(RegisterRequest $request): \Illuminate\Http\RedirectResponse|Response
     {
         $user = User::where('email', $request->email)->first();
 
@@ -47,5 +47,15 @@ class AuthController extends Controller
         ]);
 
         return response(resolve(AuthService::class)->getResponseBodyAuth($newUser), Response::HTTP_OK);
+    }
+
+    /**
+     * @return Response
+     */
+    public function logout(): Response
+    {
+        auth()->user()->tokens()->delete();
+
+        return response(['message' => 'Logged out'],Response::HTTP_OK);
     }
 }
